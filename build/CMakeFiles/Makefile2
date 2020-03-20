@@ -53,38 +53,38 @@ CMAKE_SOURCE_DIR = "/mnt/d/Documents/School/ZZ3/Géométrie algorithmique/TP2/sr
 CMAKE_BINARY_DIR = "/mnt/d/Documents/School/ZZ3/Géométrie algorithmique/TP2/build"
 
 #=============================================================================
-# Target rules for target CMakeFiles/octree.dir
+# Target rules for target CMakeFiles/main.dir
 
 # All Build rule for target.
-CMakeFiles/octree.dir/all:
-	$(MAKE) -f CMakeFiles/octree.dir/build.make CMakeFiles/octree.dir/depend
-	$(MAKE) -f CMakeFiles/octree.dir/build.make CMakeFiles/octree.dir/build
+CMakeFiles/main.dir/all:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/depend
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report "/mnt/d/Documents/School/ZZ3/Géométrie algorithmique/TP2/build/CMakeFiles"  1
-	@echo "Built target octree"
-.PHONY : CMakeFiles/octree.dir/all
+	@echo "Built target main"
+.PHONY : CMakeFiles/main.dir/all
 
 # Include target in all.
-all: CMakeFiles/octree.dir/all
+all: CMakeFiles/main.dir/all
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/octree.dir/rule: cmake_check_build_system
+CMakeFiles/main.dir/rule: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/d/Documents/School/ZZ3/Géométrie algorithmique/TP2/build/CMakeFiles" 1
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/octree.dir/all
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/main.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start "/mnt/d/Documents/School/ZZ3/Géométrie algorithmique/TP2/build/CMakeFiles" 0
-.PHONY : CMakeFiles/octree.dir/rule
+.PHONY : CMakeFiles/main.dir/rule
 
 # Convenience name for target.
-octree: CMakeFiles/octree.dir/rule
-.PHONY : octree
+main: CMakeFiles/main.dir/rule
+.PHONY : main
 
 # clean rule for target.
-CMakeFiles/octree.dir/clean:
-	$(MAKE) -f CMakeFiles/octree.dir/build.make CMakeFiles/octree.dir/clean
-.PHONY : CMakeFiles/octree.dir/clean
+CMakeFiles/main.dir/clean:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/clean
+.PHONY : CMakeFiles/main.dir/clean
 
 # clean rule for target.
-clean: CMakeFiles/octree.dir/clean
+clean: CMakeFiles/main.dir/clean
 .PHONY : clean
 
 #=============================================================================

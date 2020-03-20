@@ -99,41 +99,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named octree
+# Target rules for targets named main
 
 # Build rule for target.
-octree: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 octree
-.PHONY : octree
+main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 main
+.PHONY : main
 
 # fast build rule for target.
-octree/fast:
-	$(MAKE) -f CMakeFiles/octree.dir/build.make CMakeFiles/octree.dir/build
-.PHONY : octree/fast
+main/fast:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
+.PHONY : main/fast
 
-octree.o: octree.cpp.o
-.PHONY : octree.o
+main.o: main.cpp.o
+.PHONY : main.o
 
 # target to build an object file
-octree.cpp.o:
-	$(MAKE) -f CMakeFiles/octree.dir/build.make CMakeFiles/octree.dir/octree.cpp.o
-.PHONY : octree.cpp.o
+main.cpp.o:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
+.PHONY : main.cpp.o
 
-octree.i: octree.cpp.i
-.PHONY : octree.i
+main.i: main.cpp.i
+.PHONY : main.i
 
 # target to preprocess a source file
-octree.cpp.i:
-	$(MAKE) -f CMakeFiles/octree.dir/build.make CMakeFiles/octree.dir/octree.cpp.i
-.PHONY : octree.cpp.i
+main.cpp.i:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-octree.s: octree.cpp.s
-.PHONY : octree.s
+main.s: main.cpp.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-octree.cpp.s:
-	$(MAKE) -f CMakeFiles/octree.dir/build.make CMakeFiles/octree.dir/octree.cpp.s
-.PHONY : octree.cpp.s
+main.cpp.s:
+	$(MAKE) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -142,11 +142,11 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... edit_cache"
-	@echo "... octree"
+	@echo "... main"
 	@echo "... rebuild_cache"
-	@echo "... octree.o"
-	@echo "... octree.i"
-	@echo "... octree.s"
+	@echo "... main.o"
+	@echo "... main.i"
+	@echo "... main.s"
 .PHONY : help
 
 
