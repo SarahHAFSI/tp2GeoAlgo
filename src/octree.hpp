@@ -12,7 +12,7 @@
 #include <vector>
 #include <map>
 
-int MaxDepth = 2;
+int MaxDepth = 4;
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Polyhedron_3<Kernel> Polyhedron;
@@ -24,9 +24,6 @@ typedef Polyhedron::Halfedge_iterator Halfedge_iterator;
 typedef Polyhedron::Halfedge_around_facet_circulator Halfedge_facet_circulator;
 typedef Kernel::Point_3 Point_3;
 
-
-
-class Cell;
 
 class BoundingBox{
     private:
@@ -50,7 +47,7 @@ class Cell{
         std::vector<Cell*> _sonCell;
         Cell * _dadCell;
         bool feuille;
-        int Depth;
+        int _depth;
         std::vector<float> color;
 
     public:
@@ -59,12 +56,14 @@ class Cell{
         void divisionCell(BoundingBox &, int);
         int  sizeCell() const;
         bool Isfeuille() const;
-        void setfeuille(bool);
-        int  getDepth() const;
-        std::vector<Cell*> getSonCell() const;
+        int                        getDepth() const;
+        std::vector<Cell*>         getSonCell() const;
         std::vector<Vertex_handle> getVertexList() const;
+        std::vector<float>         getColor() const;
+        void setDepth(int);
+        void setfeuille(bool);
         void setColor();
-        std::vector<float> getColor() const;
+
 };
 
 

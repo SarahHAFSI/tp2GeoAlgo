@@ -85,8 +85,13 @@ void Cell::setfeuille(bool f) {
 }
 
 int Cell::getDepth() const{
-    return Depth;
+    return _depth;
 }
+
+void Cell::setDepth(int depth){
+    _depth = depth;
+}
+
 
 void Cell::setColor(){
     color.clear();
@@ -113,23 +118,29 @@ std::vector<Vertex_handle> Cell::getVertexList() const{
 }
 
 
-void Cell::addNewVertex(Vertex_handle newVertex, int maxVertex, BoundingBox & box){
 
+void Cell::addNewVertex(Vertex_handle newVertex, int maxVertex, BoundingBox & box){
     if (this->Isfeuille()){ 
+        //std::cout << "iffeuille" << std::endl;
         if(this->getDepth() >= MaxDepth){   //Si la profondeur max est atteinte
-               _vertexList.push_back(newVertex);
+            //std::cout << "prof max atteinte" << std::endl;
+            _vertexList.push_back(newVertex);
         }
         else {
-            if(this->sizeCell() < maxVertex){   //Si il y a trop de sommets dans la cellule
+            //std::cout << "prof max non atteinte" << std::endl;
+            if(this->sizeCell() < maxVertex){                   //Si il y a de la place dans la cellule
+                //std::cout << "place dans la cellule" << std::endl;
                 _vertexList.push_back(newVertex);
             }
             else {
+                //std::cout << "pas de place" << std::endl;
                 //divison de cellules, on commence par créer les fils et on ajoute ensuite les sommets dans la liste des fils
                 //Cell * dad = this;  
                 for (int i = 0; i < 8; ++i){
                     Cell * x = new Cell();  //On crée un fils
                     x->_dadCell = this;
-                    x->Depth = (this->Depth) + 1; //La profondeur du fils est celle du père +1
+                    //x.setDepth(this->_depth + 1);
+                    x->_depth = (this->_depth) + 1; //La profondeur du fils est celle du père +1
                     _sonCell.push_back(x);
                     //_sonCell[i]->_dadCell = dad;
                 }
@@ -140,18 +151,18 @@ void Cell::addNewVertex(Vertex_handle newVertex, int maxVertex, BoundingBox & bo
         }
     }
     else {
+        //std::cout << "else isfeuille" << std::endl;
+        float minX = box.getMin()[0];
+        float minY = box.getMin()[1];
+        float minZ = box.getMin()[2];
+        float maxX = box.getMax()[0];
+        float maxY = box.getMax()[1];
+        float maxZ = box.getMax()[2];
 
-         float minX = box.getMin()[0];
-         float minY = box.getMin()[1];
-         float minZ = box.getMin()[2];
-         float maxX = box.getMax()[0];
-         float maxY = box.getMax()[1];
-         float maxZ = box.getMax()[2];
-
-         //découpage en 8 cubes
-         float middleX = (minX + maxX)/2;
-         float middleY = (minY + maxY)/2;
-         float middleZ = (minZ + maxZ)/2;
+        //découpage en 8 cubes
+        float middleX = (minX + maxX)/2;
+        float middleY = (minY + maxY)/2;
+        float middleZ = (minZ + maxZ)/2;
         //on relance la fn sur la cellule fils correspondante
         //on change la box a chaque fois
         BoundingBox B;
@@ -226,6 +237,7 @@ void Cell::addNewVertex(Vertex_handle newVertex, int maxVertex, BoundingBox & bo
             colorMap.insert({newVertex->point(), this->getColor()});
         }
         
+        std::cout << _sonCell.size() << std::endl;
     }
 }
 
@@ -312,6 +324,7 @@ Octree::Octree(Polyhedron& mesh, int maxVertex, BoundingBox & box){
     BoundingBox bb(mesh);
     _boundingbox = bb;
     _maxVertex = maxVertex;
+    _root.setDepth(0);
 
     std::cout << "avant octree" << std::endl;
     
@@ -379,26 +392,24 @@ int main(int argc, char* argv[]){
 	
 	Polyhedron mesh;
 	std::ifstream input(argv[1]);
-	if (!input || !(input >> mesh) || mesh.is_empty()) {
+	if (!input || !(input >> mesh) || mesh.empty()) {
 		std::cerr << "Le fichier donné n'est pas un fichier off valide." << std::endl;
 		return 1;
   	}
 
     BoundingBox bb(mesh);
 
-    std::cout << "min : " << bb.getMin()[0] << " " << bb.getMin()[1] << " " << bb.getMin()[2] << std::endl;
-    std::cout << "max : " << bb.getMax()[0] << " " << bb.getMax()[1] << " " << bb.getMax()[2] << std::endl;
+    //std::cout << "min : " << bb.getMin()[0] << " " << bb.getMin()[1] << " " << bb.getMin()[2] << std::endl;
+    //std::cout << "max : " << bb.getMax()[0] << " " << bb.getMax()[1] << " " << bb.getMax()[2] << std::endl;
 
 
-    Octree octo(mesh,3,bb);
+    Octree octo(mesh, 2, bb);
 
     //createOff(mesh);
-
-    for (int i=0;i<8;i++){
-        std::cout << " cel " << i << " " <<octo.getRoot().getSonCell()[i]->getVertexList().size() << std::endl;
+    for (int i=0; i<8; i++){
+        std::cout << " cel " << i << " " << octo.getRoot().getSonCell()[i]->getVertexList().size() << std::endl;
         if (octo.getRoot().getSonCell()[i]-> getVertexList().size() == 0){
             for (int j=0;j<8;j++){
-                //colorMap[octo.getRoot().getSonCell()[i]>getSonCell()[j]->getVertexList()[i][0]];
                 std::cout << "     fils " << i << " " << octo.getRoot().getSonCell()[i]->getSonCell()[j]->getVertexList().size()  << std::endl;
                 //std::cout << "     fils " << i << " " << octo.getRoot().getSonCell()[i]->getSonCell()[j]->getVertexList().size() << " c : " << colorMap[octo.getRoot().getSonCell()[i]->getSonCell()[j]->getVertexList()[i][0]] << std::endl; 
             }
@@ -406,11 +417,11 @@ int main(int argc, char* argv[]){
     }
 
     std::cout << "taille : " << colorMap.size() << std::endl;
-    std::cout << "nb sommets :";
+    std::cout << "nb sommets : ";
     unsigned int nb = computeNbVert(mesh);
     std::cout << nb << std::endl;
 
-    createOff(mesh);
+    //createOff(mesh);
 
 
     return 0;
