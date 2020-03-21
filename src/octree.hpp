@@ -3,17 +3,6 @@
 
 #include "cell.hpp"
 
-typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
-typedef CGAL::Polyhedron_3<Kernel> Polyhedron;
-typedef Polyhedron::Facet_iterator Facet_iterator;
-typedef Polyhedron::Facet_handle Facet_handle;
-typedef Polyhedron::Vertex_iterator Vertex_iterator;
-typedef Polyhedron::Vertex_handle Vertex_handle;
-typedef Polyhedron::Halfedge_iterator Halfedge_iterator;
-typedef Polyhedron::Halfedge_around_facet_circulator Halfedge_facet_circulator;
-typedef Kernel::Point_3 Point_3;
-
-
 class Octree{
 
     private:
