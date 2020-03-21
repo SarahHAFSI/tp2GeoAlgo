@@ -1,18 +1,7 @@
 #ifndef __OCTREE_HPP__
 #define __OCTREE_HPP__
 
-#include <CGAL/Exact_predicates_inexact_constructions_kernel.h>
-#include <CGAL/boost/graph/graph_traits_Polyhedron_3.h>
-#include <CGAL/IO/Polyhedron_iostream.h>
-#include <iostream>
-#include <fstream>
-#include <math.h>
-#include <algorithm>
-#include <stdlib.h>
-#include <vector>
-#include <map>
-
-int MaxDepth = 4;
+#include "cell.hpp"
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Polyhedron_3<Kernel> Polyhedron;
@@ -25,64 +14,31 @@ typedef Polyhedron::Halfedge_around_facet_circulator Halfedge_facet_circulator;
 typedef Kernel::Point_3 Point_3;
 
 
-class BoundingBox{
-    private:
-        std::vector<float> _min;
-        std::vector<float> _max;
-
-    public:
-        BoundingBox(){};
-        BoundingBox(Polyhedron& mesh);
-        std::vector<float> getMin() const;
-        std::vector<float> getMax() const;
-        void setMax(float, float, float);
-        void setMin(float, float, float);
-};
-
-
-class Cell{
-
-    private:
-        std::vector<Vertex_handle> _vertexList;
-        std::vector<Cell*> _sonCell;
-        Cell * _dadCell;
-        bool feuille;
-        int _depth;
-        std::vector<float> color;
-
-    public:
-        Cell(): feuille(1) {};
-        void addNewVertex(Vertex_handle, int, BoundingBox &);
-        void divisionCell(BoundingBox &, int);
-        int  sizeCell() const;
-        bool Isfeuille() const;
-        int                        getDepth() const;
-        std::vector<Cell*>         getSonCell() const;
-        std::vector<Vertex_handle> getVertexList() const;
-        std::vector<float>         getColor() const;
-        void setDepth(int);
-        void setfeuille(bool);
-        void setColor();
-
-};
-
-
 class Octree{
 
     private:
-        int _maxVertex;
-        BoundingBox _boundingbox;
         Cell _root;
 
     public:
         Octree() {};
-        Octree(Polyhedron &, int, BoundingBox &);
-        void setMaxVertex(int);
-        int getMaxVertex() const;
-        Cell getRoot() const;
+
+        Octree(Polyhedron& mesh, int maxVertex, int maxDepth){
+            BoundingBox box(mesh);
+            _root.setDepth(0);
+
+            std::cout << "avant octree" << std::endl;
+            
+            for(Vertex_iterator it = mesh.vertices_begin(); it != mesh.vertices_end(); it++){
+                _root.addNewVertex(it, maxVertex, box, maxDepth);
+            }
+            std::cout << "apres octree" << std::endl;
+        };
+        
+        Cell getRoot() const{
+            return _root;
+        };
 
 };
 
-unsigned int computeNbVert(Polyhedron&);
 
 #endif
