@@ -22,31 +22,25 @@ int main(int argc, char* argv[]){
 		std::cerr << "Le fichier donné n'est pas un fichier off valide." << std::endl;
 		return 1;
   	}
-
-    //BoundingBox bb(mesh);
-
-    //Octree octo(mesh, 2, bb, 4);
     
     Octree octo(mesh, 2, 4);
-
-
+	std::ofstream flux("colorationSommets.off");
+    octo.coloring(mesh, flux);
+    
+    /*
     for (int i=0; i<8; i++){
         std::cout << " cel " << i << " " << octo.getRoot().getSonCell()[i]->getVertexList().size() << std::endl;
         if (octo.getRoot().getSonCell()[i]-> getVertexList().size() == 0){
             for (int j=0;j<8;j++){
                 std::cout << "     fils " << i << " " << octo.getRoot().getSonCell()[i]->getSonCell()[j]->getVertexList().size()  << std::endl;
-                //std::cout << "     fils " << i << " " << octo.getRoot().getSonCell()[i]->getSonCell()[j]->getVertexList().size() << " c : " << colorMap[octo.getRoot().getSonCell()[i]->getSonCell()[j]->getVertexList()[i][0]] << std::endl; 
             }
         }
     }
-
-    std::cout << "taille : " << colorMap.size() << std::endl;
-    std::cout << "nb sommets : ";
-    unsigned int nb = computeNbVert(mesh);
-    std::cout << nb << std::endl;
-
-    //coloration(mesh);
-
+    */
+    //std::cout << "taille : " << colorMap.size() << std::endl;
+    //std::cout << "nb sommets : ";
+    //unsigned int nb = computeNbVert(mesh);
+    //std::cout << nb << std::endl;
 
     return 0;
 }

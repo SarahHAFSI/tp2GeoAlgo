@@ -18,14 +18,17 @@
 
 typedef CGAL::Exact_predicates_inexact_constructions_kernel Kernel;
 typedef CGAL::Polyhedron_3<Kernel>                          Polyhedron;
+typedef Polyhedron::Facet_handle                            Facet_handle;
 typedef Polyhedron::Facet_iterator                          Facet_iterator;
 typedef Polyhedron::Halfedge_iterator                       Halfedge_iterator;
+typedef Polyhedron::Halfedge_around_facet_circulator        Halfedge_facet_circulator;
 typedef Polyhedron::Vertex_iterator                         Vertex_iterator;
 typedef Polyhedron::Vertex_handle                           Vertex_handle;
 typedef Kernel::Point_3                                     Point_3;
 typedef std::map<Polyhedron::Facet_handle, float>		    Facet_float_map;
 typedef std::map<Polyhedron::Facet_handle, int>			    Facet_int_map;
 typedef std::map<Point_3, std::vector<float>>               Point_3_color_map;
+
 
 Point_3_color_map colorMap;
 

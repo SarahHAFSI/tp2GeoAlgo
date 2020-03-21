@@ -165,33 +165,19 @@ class Cell{
             _vertexList.clear(); 
         };
 
-        bool Isfeuille() const{
-            return _feuille;
-        };
+        bool Isfeuille() const{return _feuille; };
 
-        int getDepth() const{
-            return _depth;
-        };
+        int getDepth() const{return _depth; };
 
-        std::vector<Cell*> getSonCell() const{
-            return _sonCell;
-        };
+        std::vector<Cell*> getSonCell() const{return _sonCell;};
 
-        std::vector<Vertex_handle> getVertexList() const{
-            return _vertexList;
-        };
+        std::vector<Vertex_handle> getVertexList() const{return _vertexList;};
 
-        std::vector<float> getColor() const{
-             return _color;
-        };
+        std::vector<float> getColor() const{return _color;};
 
-        void setDepth(int depth){
-            _depth = depth;
-        };
+        void setDepth(int depth){_depth = depth;};
 
-        void setfeuille(bool f){
-            _feuille = f;
-        };
+        void setfeuille(bool f){_feuille = f;};
 
         void randomColor(){
             _color.clear();
@@ -200,9 +186,7 @@ class Cell{
             float g = (double)rand()/RAND_MAX;
             float b = (double)rand()/RAND_MAX;
 
-            _color.push_back(r);
-            _color.push_back(g);
-            _color.push_back(b);
+            _color = {r, g, b};
         };
 
 };
