@@ -26,8 +26,9 @@ int main(int argc, char* argv[]){
     Octree octo(mesh, 2, 4);
 	std::ofstream flux("colorationSommets.off");
     octo.coloring(mesh, flux);
+    std::ofstream flux2("fusionAvg.off");
+    octo.createSimplifiedMesh(mesh, flux2);
     
-    /*
     for (int i=0; i<8; i++){
         std::cout << " cel " << i << " " << octo.getRoot().getSonCell()[i]->getVertexList().size() << std::endl;
         if (octo.getRoot().getSonCell()[i]-> getVertexList().size() == 0){
@@ -36,7 +37,7 @@ int main(int argc, char* argv[]){
             }
         }
     }
-    */
+    
     //std::cout << "taille : " << colorMap.size() << std::endl;
     //std::cout << "nb sommets : ";
     //unsigned int nb = computeNbVert(mesh);

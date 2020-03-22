@@ -28,6 +28,7 @@ typedef Kernel::Point_3                                     Point_3;
 typedef std::map<Polyhedron::Facet_handle, float>		    Facet_float_map;
 typedef std::map<Polyhedron::Facet_handle, int>			    Facet_int_map;
 typedef std::map<Point_3, std::vector<float>>               Point_3_color_map;
+typedef std::map<Vertex_handle, Point_3>                    Vertex_Point_3_map;
 
 
 Point_3_color_map colorMap;
